@@ -8,7 +8,7 @@ jobs:
       DATABASE_URL: ${{ secrets.DATABASE_URL }}
       SECRET_KEY: ${{ secrets.SECRET_KEY }}
       ALGORITHM: ${{ secrets.ALGORITHM }}
-      ACCESS_TOKEN_EXPIRE_MINUTES: ${{ secrets.ACCESS_TOKEN_EXPIRE_MINUTES }}
+      EXCESS_TOKEN_EXPIRE_MINUTES: ${{ secrets.EXCESS_TOKEN_EXPIRE_MINUTES }}
     steps:
       - name: Copiar arquivos do repositorio
         uses: actions/checkout@v3
