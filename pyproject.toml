@@ -1,0 +1,60 @@
+[tool.poetry]
+name = "fast-zero"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = {extras = ["standard"], version = "^0.115.12"}
+sqlalchemy = "^2.0.40"
+pydantic-settings = "^2.9.1"
+alembic = "^1.15.2"
+pwdlib = {extras = ["argon2"], version = "^0.2.1"}
+python-multipart = "^0.0.20"
+pyjwt = "^2.10.1"
+psycopg = {extras = ["binary"], version = "^3.2.9"}
+
+[tool.ruff]
+line-length = 90
+extend-exclude = ['migrations']
+
+# Varias formatações
+[tool.ruff.lint]
+preview = true
+select = ['I', 'F', 'E', 'W', 'PL', 'PT']
+ignore = ["PLR0917", "PLR0913"] 
+
+[tool.ruff.format]
+preview = true
+quote-style = 'single'    
+
+[tool.pytest.ini_options]
+pythonpath = "."
+addopts = '-p no:warnings'
+
+
+# Ferramentas para crias elias
+[tool.taskipy.tasks]
+lint = 'ruff check' # verificar se ha erros
+pre_format = 'ruff check --fix' 
+format = 'ruff format'
+run = 'fastapi dev  fast_zero\app.py'
+runl = 'fastapi dev fast_zero/app.py' # Execução para linhas no linux
+pre_test = 'task lint'
+test = 'pytest --cov=fast_zero -vv'
+post_test = 'coverage html' # Cria um html com os dados dos teste (post_teste roda apos as tarefas)
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.11.9"
+pytest = "^8.3.5"
+pytest-cov = "^6.1.1"
+taskipy = "^1.14.1"
+factory-boy = "^3.3.3"
+freezegun = "^1.5.2"
+testcontainers = "^4.10.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
